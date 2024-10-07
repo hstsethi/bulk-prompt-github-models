@@ -4,17 +4,16 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-model_names = ["gpt4-0", "Phi-3.5-mini-instruct", "Mistral-large"]  
-def promptModel(model_name, prompt):
+models_names = ["gpt4-0", "Phi-3.5-mini-instruct", "Mistral-large"]  
+def promptModel(models_name, prompt):
     endpoint = "https://models.inference.ai.azure.com"
-    model_name = "cohere-command-r-plus"
+    model_name = models_name
     token = os.environ["GITHUB_TOKEN"]
 
     client = ChatCompletionsClient(
     endpoint=endpoint,
     credential=AzureKeyCredential(token),
 )
-
     response = client.complete(
     messages=[
         SystemMessage(content="You are a helpful assistant."),
